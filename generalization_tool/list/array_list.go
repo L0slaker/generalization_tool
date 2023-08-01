@@ -24,7 +24,7 @@ func NewArrayListOf[T any](values []T) *ArrayList[T] {
 // Get 返回对应的下标元素
 func (a *ArrayList[T]) Get(index int) (t T, e error) {
 	length := a.Len()
-	if index < 0 || index > length {
+	if index < 0 || index >= length {
 		return t, errs.NewErrIndexOutOfRange(length, index)
 	}
 	return a.values[index], e
@@ -80,7 +80,6 @@ func (a *ArrayList[T]) Len() int {
 // Cap 返回容量
 func (a *ArrayList[T]) Cap() int {
 	return cap(a.values)
-
 }
 
 // Range 遍历 List 的所有元素
