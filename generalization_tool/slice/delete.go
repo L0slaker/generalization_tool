@@ -12,16 +12,11 @@ func Delete[T any](src []T, index int) (t []T, e error) {
 		return t, errs.NewErrIndexOutOfRange(len(src), index)
 	}
 
-	j := 0
-	for i, v := range src {
-		if i != index {
-			src[j] = v
-			j++
-		}
+	for i := index; i < len(src)-1; i++ {
+		src[i] = src[i+1]
 	}
-	src = src[:j]
 
-	src = slice.Shrink[T](src)
+	src = slice.Shrink[T](src[:len(src)-1])
 
 	return src, e
 }

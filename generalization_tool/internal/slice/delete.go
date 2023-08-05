@@ -9,15 +9,10 @@ func Delete[T any](src []T, index int) ([]T, T, error) {
 		return nil, t, errs.NewErrIndexOutOfRange(len(src), index)
 	}
 
-	j := 0
 	res := src[index]
-	for i, v := range src {
-		if i != index {
-			src[j] = v
-			j++
-		}
+	for i := index; i < len(src)-1; i++ {
+		src[i] = src[i+1]
 	}
-	src = src[:j]
 
-	return src, res, nil
+	return src[:len(src)-1], res, nil
 }
