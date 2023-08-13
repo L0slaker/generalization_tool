@@ -1,6 +1,6 @@
 package mapx
 
-import "Prove/generalization_tool/syncx"
+import "generalization_tool/syncx"
 
 type Hashable interface {
 	// Code 返回元素的哈希值
@@ -29,20 +29,20 @@ func NewHashMap[T Hashable, ValType any](size int) *HashMap[T, ValType] {
 	}
 }
 
-func (m *HashMap[T, ValType]) newNode(key T, val ValType) *node[T, ValType] {
+func (m *HashMap[T, ValType]) newNode(key T, value ValType) *node[T, ValType] {
 	newNode := m.nodePool.Get()
-	newNode.value = val
+	newNode.value = value
 	newNode.key = key
 	return newNode
 }
 
-func (m *HashMap[T, ValType]) Put(key T, val ValType) error {
+func (m *HashMap[T, ValType]) Put(key T, value ValType) error {
 	hash := key.Code()
 	root, ok := m.hashmap[hash]
 	// 池中不存在重复数据，可以新建
 	if !ok {
 		hash = key.Code()
-		newNode := m.newNode(key, val)
+		newNode := m.newNode(key, value)
 		m.hashmap[hash] = newNode
 		return nil
 	}
@@ -51,13 +51,13 @@ func (m *HashMap[T, ValType]) Put(key T, val ValType) error {
 		// 遍历整个链表，查找是否存在相同的键
 		if root.key.Equals(key) {
 			//更新value
-			root.value = val
+			root.value = value
 			return nil
 		}
 		pre = root
 		root = root.next
 	}
-	newNode := m.newNode(key, val)
+	newNode := m.newNode(key, value)
 	pre.next = newNode
 	return nil
 }

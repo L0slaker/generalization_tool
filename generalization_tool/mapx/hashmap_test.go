@@ -289,10 +289,10 @@ func TestHashMap_Keys_Values(t *testing.T) {
 		{
 			name: "single key",
 			getHashMap: func() *HashMap[testData, int] {
-				testMap := NewHashMap[testData, int](10)
-				err := testMap.Put(newTestData(1), 1)
+				testHashMap := NewHashMap[testData, int](10)
+				err := testHashMap.Put(newTestData(1), 1)
 				require.NoError(t, err)
-				return testMap
+				return testHashMap
 			},
 			wantKeys:   []Hashable{newTestData(1)},
 			wantValues: []int{1},
@@ -300,12 +300,12 @@ func TestHashMap_Keys_Values(t *testing.T) {
 		{
 			name: "multiple keys",
 			getHashMap: func() *HashMap[testData, int] {
-				testMap := NewHashMap[testData, int](10)
+				testHashMap := NewHashMap[testData, int](10)
 				for _, v := range []int{1, 2} {
-					err := testMap.Put(newTestData(v), v)
+					err := testHashMap.Put(newTestData(v), v)
 					require.NoError(t, err)
 				}
-				return testMap
+				return testHashMap
 			},
 			wantKeys:   []Hashable{newTestData(1), newTestData(2)},
 			wantValues: []int{1, 2},
@@ -313,12 +313,12 @@ func TestHashMap_Keys_Values(t *testing.T) {
 		{
 			name: "same key",
 			getHashMap: func() *HashMap[testData, int] {
-				testMap := NewHashMap[testData, int](10)
-				err := testMap.Put(newTestData(1), 1)
+				testHashMap := NewHashMap[testData, int](10)
+				err := testHashMap.Put(newTestData(1), 1)
 				require.NoError(t, err)
-				err = testMap.Put(newTestData(1), 11)
+				err = testHashMap.Put(newTestData(1), 11)
 				require.NoError(t, err)
-				return testMap
+				return testHashMap
 			},
 			wantKeys:   []Hashable{newTestData(1)},
 			wantValues: []int{11},
@@ -326,14 +326,14 @@ func TestHashMap_Keys_Values(t *testing.T) {
 		{
 			name: "multiple with same key",
 			getHashMap: func() *HashMap[testData, int] {
-				testMap := NewHashMap[testData, int](10)
+				testHashMap := NewHashMap[testData, int](10)
 				for _, v := range []int{1, 2, 3} {
-					err := testMap.Put(newTestData(v), v*10)
+					err := testHashMap.Put(newTestData(v), v*10)
 					require.NoError(t, err)
 				}
-				err := testMap.Put(newTestData(1), 11)
+				err := testHashMap.Put(newTestData(1), 11)
 				require.NoError(t, err)
-				return testMap
+				return testHashMap
 			},
 			wantKeys:   []Hashable{newTestData(1), newTestData(2), newTestData(3)},
 			wantValues: []int{11, 20, 30},
@@ -341,29 +341,29 @@ func TestHashMap_Keys_Values(t *testing.T) {
 		{
 			name: "single key collision",
 			getHashMap: func() *HashMap[testData, int] {
-				testMap := NewHashMap[testData, int](10)
-				err := testMap.Put(newTestData(1), 11)
+				testHashMap := NewHashMap[testData, int](10)
+				err := testHashMap.Put(newTestData(1), 11)
 				require.NoError(t, err)
-				err = testMap.Put(newTestData(11), 111)
+				err = testHashMap.Put(newTestData(11), 111)
 				require.NoError(t, err)
-				err = testMap.Put(newTestData(111), 1111)
+				err = testHashMap.Put(newTestData(111), 1111)
 				require.NoError(t, err)
-				return testMap
+				return testHashMap
 			},
 			wantKeys:   []Hashable{newTestData(1), newTestData(11), newTestData(111)},
-			wantValues: []int{11, 1111, 1111},
+			wantValues: []int{11, 111, 1111},
 		},
 		{
 			name: "multiple key collision",
 			getHashMap: func() *HashMap[testData, int] {
-				testMap := NewHashMap[testData, int](10)
+				testHashMap := NewHashMap[testData, int](10)
 				for _, v := range []int{1, 2, 3} {
-					err := testMap.Put(newTestData(v), v)
+					err := testHashMap.Put(newTestData(v), v)
 					require.NoError(t, err)
-					err = testMap.Put(newTestData(v*10+v), v*10)
+					err = testHashMap.Put(newTestData(v*10+v), v*10)
 					require.NoError(t, err)
 				}
-				return testMap
+				return testHashMap
 			},
 			wantKeys: []Hashable{
 				newTestData(1), newTestData(11),

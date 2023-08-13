@@ -1,8 +1,8 @@
 package slice
 
 import (
-	"Prove/generalization_tool/internal/errs"
-	"Prove/generalization_tool/internal/slice"
+	"generalization_tool/internal/errs"
+	"generalization_tool/internal/slice"
 )
 
 // Delete 删除 index 处的元素

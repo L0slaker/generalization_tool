@@ -1,9 +1,9 @@
 package list
 
 import (
-	"Prove/generalization_tool/internal/errs"
 	"errors"
 	"fmt"
+	"generalization_tool/internal/errs"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

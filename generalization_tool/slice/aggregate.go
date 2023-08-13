@@ -1,6 +1,6 @@
 package slice
 
-import "Prove/generalization_tool"
+import "generalization_tool"
 
 // Max 返回最大值。
 // 该方法假设你至少会传入一个值。

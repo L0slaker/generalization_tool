@@ -1,8 +1,8 @@
 package list
 
 import (
-	"Prove/generalization_tool/internal/errs"
-	"Prove/generalization_tool/internal/slice"
+	"generalization_tool/internal/errs"
+	"generalization_tool/internal/slice"
 )
 
 var (

@@ -1,8 +1,8 @@
 package slice
 
 import (
-	"Prove/generalization_tool/internal/errs"
 	"fmt"
+	"generalization_tool/internal/errs"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

@@ -1,7 +1,7 @@
 package list
 
 import (
-	"Prove/generalization_tool/internal/errs"
+	"generalization_tool/internal/errs"
 )
 
 var (
